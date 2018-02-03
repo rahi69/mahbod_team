@@ -38,7 +38,7 @@
                 <div class="form-group"><label for="password">
                         Password<input type="password" name="password" class="form-control"></label>
                 </div>
-
+                <div>Lotfi</div>
                 <div class="form-group">
                     <input type="submit" name="submit" value="login" class="btn btn-primary" >
                 </div>
