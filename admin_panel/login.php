@@ -16,11 +16,12 @@
 
         <div class="navbar-header">
 
-            <a class="navbar-brand" href="index.php" style="color: red">Home</a>
+            <a  class="navbar-brand" href="index.php" style="color: red">Home</a>
 
         </div>
     </div>
 </nav>
+<div class="row" style="width: 100%;background-color: #d43f3a;height: 100px"></div>
 </body>
 </html>
 <!-- Page Content -->
