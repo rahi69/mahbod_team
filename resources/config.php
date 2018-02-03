@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+//session_start();
 
 defined("DS") ? null : define("DS", DIRECTORY_SEPARATOR);
 

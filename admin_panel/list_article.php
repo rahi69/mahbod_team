@@ -12,15 +12,14 @@
 </head>
 <body style="margin-left: 10px;margin-top: 10px">
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-    <button class="btn btn-primary" type="submit" name="Add_article">Add article</button>
+<form method="post" action="add_article.php">
+    <button class="btn btn-primary" type="submit"  name="Add_article">Add article</button>
 </form>
 
 
 <div class="col-lg-12">
     <h1 class="page-header">
-        article
-    </h1>
+        article    </h1>
     <h2 style="text-align: center"> </h2>
     <p class="bg-success">
     </p>

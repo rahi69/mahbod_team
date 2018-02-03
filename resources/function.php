@@ -1,5 +1,8 @@
 <?php
-class functions
+if(!isset($_SESSION))
+{
+    session_start();
+}class functions
 {
     public function set_message($msg)
     {
@@ -49,10 +52,26 @@ class functions
         return $string3;
 
     }
+    public function manage_article()
+    {
+        $sql = "SELECT * FROM tbl_article";
+        $result = $this->query($sql);
+        $this->confirm($result);
+        while ($row = $this->fetch_array($result)) {
+            $list = <<<LISTARTICLE
+               <li>
+                    <a href="index.php?delete_article={$row['id_article']}" class="DeleteBox btn btn-primary">حذف</a>
+                    &nbsp;&nbsp;&nbsp;<a href="edit_article.php?edit_article={$row['id_article']}" class="EditBox btn btn-primary">ویرایش</a><span class="nameTitle">{$row['title']}</span>&nbsp;&nbsp;
+                    <span>{$row['short_desc']}</span>
+                </li>
+LISTARTICLE;
+            echo $list;
 
+        }
+    }
     public function list_article()
     {
-        $sql = "SELECT title,short_desc,image_src FROM tbl_article";
+        $sql = "SELECT * FROM tbl_article";
         $result = $this->query($sql);
         $this->confirm($result);
         while ($row = $this->fetch_array($result)) {
@@ -63,7 +82,7 @@ class functions
           <td><img src="img/{$row['image_src']}"width="100px"height="100px"/></td>
           <td>
           <a href="index.php?delete_article={$row['id_article']}" class="btn btn-danger">Delete</a>
-          <a href="#" class="btn btn-info">Edit</a>
+          <a href="index.php?edit_article={$row['id_article']}" class="btn btn-info">Edit</a>
        
         
 </td>
@@ -96,7 +115,49 @@ LISTARTICLE;
             }
         }
     }
+    public function edit_article()
+    {
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
+        $id=$this->escape_string($_GET['edit_article']);
+        $sql="SELECT * FROM tbl_article WHERE id_article = '{$id}'";
+        $query=$this->query($sql);
+        $this->confirm($query);
+        $result =$this->fetch_array($query);
+        return $result;
 
+    }
+    public function UpdateArticleById()
+    {
+        $id=$this->escape_string($_GET['edit_article']);
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST['submit']) && is_numeric($id)) {
+                    $title = $this->escape_string($_POST['title']);
+                    $short_desc = $this->escape_string($_POST['short_desc']);
+                    $description = $this->escape_string($_POST['description']);
+                    $image = $this->escape_string($_POST['image']);
+                    $status = $this->escape_string($_POST['status']);
+                    $sql="UPDATE tbl_article SET title ='{$title}' ,short_desc = '{$short_desc}' ,image_src = '{$image}' ,description ='{$description}',status = '{$status}' WHERE id_article ='{$id}'";
+                    $result=$this->query($sql);
+//                    $this->confirm($result);
+                    if($result)
+                    {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+
+        }
     public function get_cat()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -114,7 +175,85 @@ LISTARTICLE;
             }
         }
     }
+    public function button()
+    {
+        if($_SERVER["REQUEST_METHOD"]=="POST")
+        {
+            if(isset($_POST['Add_category']))
+            {
+                $this->redirect("add_cat.php");
+            }
+            elseif (isset($_POST['Add_video']))
+            {
+                $this->redirect("add_video.php");
 
+            }
+            elseif (isset($_POST['Admin_category']))
+            {
+                $this->redirect("list_cat.php");
+
+            }
+        }
+    }
+    public function manage_video()
+    {
+        $sql = "SELECT * FROM tbl_video";
+        $result = $this->query($sql);
+        $this->confirm($result);
+        while ($row = $this->fetch_array($result)) {
+            $list = <<<VIDEO
+       <div class="CARDvideo">
+                    <video poster="img/{$row['image_prev']}" class="XLvideo" controls><source src="upload/{$row['video']}" type="video/mp4"></video>
+                    <a class="btn btn-danger" href="index.php?delete_video={$row['id_video']}">حذف</a>
+                    <button>ویرایش</button></div>
+  
+VIDEO;
+            echo $list;
+        }
+    }
+    public function list_video()
+    {
+        $sql="SELECT * FROM tbl_video";
+        $result=$this->query($sql);
+        $this->confirm($result);
+        while ($row=$this->fetch_array($result))
+        {
+            $list=<<<VIDEO
+            <ul class="list-group">
+                <div class="item"  href="#"><video width="200" height="100"  controls>
+                        <source src="upload/{$row['video']}" type="video/mp4">
+                    </video></div>
+                    <div><a class="btn btn-danger" href="index.php?delete_video={$row['id_video']}">delete</a></div>
+            </ul>
+VIDEO;
+             echo $list;
+
+        }
+    }
+    public function filter_list_video()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST['search_cat'])) {
+                $CatId = $this->escape_string($_POST['category']);
+                $sql = "SELECT tbl_video.video,tbl_video.id_video ,tbl_category.name_category FROM tbl_video LEFT OUTER JOIN tbl_category ON 
+                                          tbl_video.id_category = tbl_category.id_category WHERE tbl_video.id_category = '{$CatId}'";
+                $result = $this->query($sql);
+                $this->confirm($result);
+                while ($row = $this->fetch_array($result)) {
+                    $list = <<<LIST
+            <ul class="list-group">
+                <div class="item"  href="#"><video width="200" height="100"  controls>
+                        <source src="upload/{$row['video']}" type="video/mp4">
+                    </video></div>
+                    <div><a class="btn btn-danger" href="index.php?delete_video={$row['id_video']}">delete</a></div>
+            </ul>
+LIST;
+                    echo $list;
+
+                }
+            }
+        }
+    }
     public function get_video()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -177,7 +316,7 @@ LISTARTICLE;
                 }
                 else{
                     $username = $this->escape_string($_POST['username']);
-//                    $password = $this->escape_string($_POST['password']);
+//                  $password = $this->escape_string($_POST['password']);
                     $rpassword = $this->escape_string($_POST['rpassword']);
                     if ($_POST['password'] == $rpassword) {
                         $password = $this->escape_string($_POST['password']);
@@ -199,3 +338,4 @@ LISTARTICLE;
         }
     }
 }
+$function=new functions();
