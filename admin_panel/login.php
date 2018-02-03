@@ -26,8 +26,8 @@
 <!-- Page Content -->
 <div class="container">
     <header>
-        <h1 class="text-center">Login</h1>
-        <div class="col-sm-4 col-sm-offset-5" style="margin:0 auto;">
+        <h1 class="text-center">Login admin</h1>
+        <div class="col-sm-4 col-sm-offset-5" style="margin:10px;">
             <form class="" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                 <?php $function=new functions();
                 $function->login();
