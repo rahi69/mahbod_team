@@ -36,7 +36,7 @@
                         username<input type="text" name="username" class="form-control"></label>
                 </div>
                 <div class="form-group"><label for="password">
-                        Password<input type="password" name="password" class="form-control"></label>
+                        pass<input type="password" name="password" class="form-control"></label>
                 </div>
 
                 <div class="form-group">
