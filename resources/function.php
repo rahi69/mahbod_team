@@ -221,7 +221,7 @@ VIDEO;
 
             $gallery=<<<DELIMITER
 <div class="SCard">
-                <img class="Svideo" >
+                <img class="Svideo" src=img/"{$row['gallery_src']}">
                 <button>حذف</button><button>ویرایش</button>
             </div>
 DELIMITER;
