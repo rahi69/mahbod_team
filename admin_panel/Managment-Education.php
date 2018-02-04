@@ -100,9 +100,40 @@
             <div id="myOverlayone" class="overlay">
                 <span class="closebtn" onclick="closeSearch1()" title="Close Overlay">×</span>
                 <div class="overlay-content">
-                    <a href="#" id="mybtn" class="row col-lg-12 btn btn-primary btn-lg">افزودن دسته</a>
-                    <br/><br/><br/><br/>
-                    <input class="row col-lg-12" type="text" placeholder="نام دسته">
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <?php
+                        $function=new functions();
+                        $function->get_cat(); ?>
+
+                        <input class="row col-lg-12" name="name_cat" type="text" placeholder="نام دسته">
+                        <br/><br/><br/><br/>
+                        <button id="mybtn" type="submit" name="submit"  class="row col-lg-12 btn btn-primary btn-lg" >افزودن دسته</button>
+
+
+                    </form>
+
+                </div>
+            </div>
+            <div id="myOverlayTwo" class="overlay">
+                <span class="closebtn" onclick="closeSearch2()" title="Close Overlay">×</span>
+                <div class="overlay-content">
+                    <div class="form">
+                        <form>
+                            <input style="margin-bottom: 50px" type="text" class="form-control text-right" placeholder="نام" required autofocus>
+                            <br>
+                            <input type="text" class="form-control text-right" placeholder="قسمت" required autofocus>
+                            <br>
+                            <div class="form-group">
+                                <textarea class="text-editor text-right TextEditor" rows="5"></textarea>
+                            </div>
+                            <input type="button" class="form-control wrap videobuttom" value="ویدئو">
+
+                            <input type="button" class="form-control wrap" value="عکس">
+                            <br>
+
+                        </form>
+
+                    </div>
 
                 </div>
             </div>
@@ -113,40 +144,7 @@
     <div id="HomeLIST"  class="nav-side-menu col-lg-4">
         <!--BUTTON LIST-->
         <!--<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>-->
-
-        <div class="menu-list">
-
-            <ul id="menu-content" class="menu-content collapse out">
-
-                <li data-toggle="collapse" data-target="#ads" class="collapsed">
-                    <a class="list" href="main.html"><i class="fa fa-camera fa-lg"></i>صفحه اصلی </a>
-
-                </li>
-
-                <li data-toggle="collapse" data-target="#ads" class="collapsed">
-                    <a class="list" href="Managmant-Gallery.html"><i class="fa fa-camera fa-lg"></i> مدیریت گالری </a>
-
-                </li>
-
-
-                <li data-toggle="collapse" data-target="#service" class="collapsed">
-                    <a class="list" href="ManagmantArticle.html"><i class="glyphicon glyphicon-duplicate fa-lg"></i> مدیریت مقالات </a>
-                </li>
-
-
-                <li data-toggle="collapse" data-target="#new" class="collapsed">
-                    <a class="list" href="Managment-Education.html"><i class="glyphicon glyphicon-briefcase fa-lg"></i> مدیریت آموزش </a>
-                </li>
-
-
-                <li data-toggle="collapse" data-target="#ads" class="collapsed">
-                    <a class="list()" href="#"><i class="fa fa-black-tie fa-lg"></i> درباره من </a>
-                </li>
-
-
-            </ul>
-
-        </div>
+        <?php include TEMPLATE_FRONT . 'nav_right.php'; ?>
 
     </div>
 
@@ -172,5 +170,14 @@
 
     function closeSearch1() {
         document.getElementById("myOverlayone").style.display = "none";
+    }
+</script>
+<script>
+    function openSearch2() {
+        document.getElementById("myOverlayTwo").style.display = "block";
+    }
+
+    function closeSearch2() {
+        document.getElementById("myOverlayTwo").style.display = "none";
     }
 </script>

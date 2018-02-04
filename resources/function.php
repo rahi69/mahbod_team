@@ -52,6 +52,7 @@ if(!isset($_SESSION))
         return $string3;
 
     }
+
     public function manage_article()
     {
         $sql = "SELECT * FROM tbl_article";
@@ -60,7 +61,7 @@ if(!isset($_SESSION))
         while ($row = $this->fetch_array($result)) {
             $list = <<<LISTARTICLE
                <li>
-                    <a href="index.php?delete_article={$row['id_article']}" class="DeleteBox btn btn-primary">حذف</a>
+                    <a href="index2.php?delete_article={$row['id_article']}" class="DeleteBox btn btn-primary">حذف</a>
                     &nbsp;&nbsp;&nbsp;<a href="edit_article.php?edit_article={$row['id_article']}" class="EditBox btn btn-primary">ویرایش</a><span class="nameTitle">{$row['title']}</span>&nbsp;&nbsp;
                     <span>{$row['short_desc']}</span>
                 </li>
@@ -69,6 +70,7 @@ LISTARTICLE;
 
         }
     }
+
     public function list_article()
     {
         $sql = "SELECT * FROM tbl_article";
@@ -81,8 +83,8 @@ LISTARTICLE;
           <td>{$row['short_desc']}</td>
           <td><img src="img/{$row['image_src']}"width="100px"height="100px"/></td>
           <td>
-          <a href="index.php?delete_article={$row['id_article']}" class="btn btn-danger">Delete</a>
-          <a href="index.php?edit_article={$row['id_article']}" class="btn btn-info">Edit</a>
+          <a href="index2.php?delete_article={$row['id_article']}" class="btn btn-danger">Delete</a>
+          <a href="index2.php?edit_article={$row['id_article']}" class="btn btn-info">Edit</a>
        
         
 </td>
@@ -115,49 +117,47 @@ LISTARTICLE;
             }
         }
     }
+
     public function edit_article()
     {
-        if(!isset($_SESSION))
-        {
+        if (!isset($_SESSION)) {
             session_start();
         }
-        $id=$this->escape_string($_GET['edit_article']);
-        $sql="SELECT * FROM tbl_article WHERE id_article = '{$id}'";
-        $query=$this->query($sql);
+        $id = $this->escape_string($_GET['edit_article']);
+        $sql = "SELECT * FROM tbl_article WHERE id_article = '{$id}'";
+        $query = $this->query($sql);
         $this->confirm($query);
-        $result =$this->fetch_array($query);
+        $result = $this->fetch_array($query);
         return $result;
 
     }
+
     public function UpdateArticleById()
     {
-        $id=$this->escape_string($_GET['edit_article']);
+        $id = $this->escape_string($_GET['edit_article']);
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST['submit']) && is_numeric($id)) {
-                    $title = $this->escape_string($_POST['title']);
-                    $short_desc = $this->escape_string($_POST['short_desc']);
-                    $description = $this->escape_string($_POST['description']);
-                    $image = $this->escape_string($_POST['image']);
-                    $status = $this->escape_string($_POST['status']);
-                    $sql="UPDATE tbl_article SET title ='{$title}' ,short_desc = '{$short_desc}' ,image_src = '{$image}' ,description ='{$description}',status = '{$status}' WHERE id_article ='{$id}'";
-                    $result=$this->query($sql);
+                $title = $this->escape_string($_POST['title']);
+                $short_desc = $this->escape_string($_POST['short_desc']);
+                $description = $this->escape_string($_POST['description']);
+                $image = $this->escape_string($_POST['image']);
+                $status = $this->escape_string($_POST['status']);
+                $sql = "UPDATE tbl_article SET title ='{$title}' ,short_desc = '{$short_desc}' ,image_src = '{$image}' ,description ='{$description}',status = '{$status}' WHERE id_article ='{$id}'";
+                $result = $this->query($sql);
 //                    $this->confirm($result);
-                    if($result)
-                    {
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                }
-                else
-                {
+                if ($result) {
+                    return true;
+                } else {
                     return false;
                 }
-
+            } else {
+                return false;
             }
 
         }
+
+    }
+
     public function get_cat()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -175,26 +175,22 @@ LISTARTICLE;
             }
         }
     }
+
     public function button()
     {
-        if($_SERVER["REQUEST_METHOD"]=="POST")
-        {
-            if(isset($_POST['Add_category']))
-            {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST['Add_category'])) {
                 $this->redirect("add_cat.php");
-            }
-            elseif (isset($_POST['Add_video']))
-            {
+            } elseif (isset($_POST['Add_video'])) {
                 $this->redirect("add_video.php");
 
-            }
-            elseif (isset($_POST['Admin_category']))
-            {
+            } elseif (isset($_POST['Admin_category'])) {
                 $this->redirect("list_cat.php");
 
             }
         }
     }
+
     public function manage_video()
     {
         $sql = "SELECT * FROM tbl_video";
@@ -206,30 +202,30 @@ LISTARTICLE;
                     <video poster="img/{$row['image_prev']}" class="XLvideo" controls><source src="upload/{$row['video']}" type="video/mp4"></video>
                     <a class="btn btn-danger" href="index.php?delete_video={$row['id_video']}">حذف</a>
                     <button>ویرایش</button></div>
-  
 VIDEO;
             echo $list;
         }
     }
+
     public function list_video()
     {
-        $sql="SELECT * FROM tbl_video";
-        $result=$this->query($sql);
+        $sql = "SELECT * FROM tbl_video";
+        $result = $this->query($sql);
         $this->confirm($result);
-        while ($row=$this->fetch_array($result))
-        {
-            $list=<<<VIDEO
+        while ($row = $this->fetch_array($result)) {
+            $list = <<<VIDEO
             <ul class="list-group">
                 <div class="item"  href="#"><video width="200" height="100"  controls>
                         <source src="upload/{$row['video']}" type="video/mp4">
                     </video></div>
-                    <div><a class="btn btn-danger" href="index.php?delete_video={$row['id_video']}">delete</a></div>
+                    <div><a class="btn btn-danger" href="index2.php?delete_video={$row['id_video']}">delete</a></div>
             </ul>
 VIDEO;
-             echo $list;
+            echo $list;
 
         }
     }
+
     public function filter_list_video()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -254,6 +250,7 @@ LIST;
             }
         }
     }
+
     public function get_video()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -279,6 +276,7 @@ LIST;
             }
         }
     }
+
     public function login()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -288,7 +286,7 @@ LIST;
 
                 } else {
                     $username = $this->escape_string($_POST['username']);
-                    $password = $this->escape_string($_POST['password']);
+                    $password =sha1($this->escape_string($_POST['password']));
                     $sql = "SELECT * FROM admin WHERE username='{$username}' AND password ='{$password}'";
                     $result = $this->query($sql);
                     $this->confirm($result);
@@ -304,34 +302,35 @@ LIST;
             }
         }
     }
+
     public function sign_up()
     {
-        if($_SERVER["REQUEST_METHOD"]== "POST")
-        {
-            if(isset($_POST['submit']))
-            {
-                if(empty($_POST['username']) ||empty($_POST['password']) || empty($_POST['rpassword'])||empty($_POST['email']))
-                {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST['submit'])) {
+                if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['rpassword']) || empty($_POST['email'])) {
                     echo '<p style="background-color: #ac2925;color: white ;text-align: center"> Please fill all fields </p>';
-                }
-                else{
+                } else {
                     $username = $this->escape_string($_POST['username']);
-//                  $password = $this->escape_string($_POST['password']);
-                    $rpassword = $this->escape_string($_POST['rpassword']);
-                    if ($_POST['password'] == $rpassword) {
-                        $password = $this->escape_string($_POST['password']);
-                    } else {
-                        echo '<p style="background-color: #ac2925;color: white ;text-align: center">password wrong!! </p>';
-                    }
+                    $password1 = $this->escape_string($_POST['password']);
+                    $password2 = $this->escape_string($_POST['rpassword']);
                     $email = $this->escape_string($_POST['email']);
                     // check if e-mail address syntax is valid
-                    if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email))
-                    {
+                    if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)) {
                         echo '<p style="background-color: #ac2925;color: white ;text-align: center"> Invalid email format </p>';
+                        exit();
+                    }
+                    if (strlen($password1) < 3 || strlen($password2) < 3) {
+                        echo '<p style="background-color: #ac2925;color: white ;text-align: center"> Passwords arent strong enought</p>';
+                        exit;
                     }
 
-                    $sql="INSERT INTO admin (username,password,email) VALUES ('$username','$password','$email')";
-                    $result=$this->query($sql);
+                    if ($password1 != $password2) {
+                        echo '<p style="background-color: #ac2925;color: white ;text-align: center"> Passwords not matched</p>';
+                        exit;
+                    }
+                    $hashedPassword = sha1($password1);
+                    $sql = "INSERT INTO admin (username,password,email) VALUES ('$username','$hashedPassword','$email')";
+                    $result = $this->query($sql);
                     $this->confirm($result);
                 }
             }
