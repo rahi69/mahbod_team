@@ -1,3 +1,4 @@
+<?php include_once "../resources/config.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,36 +46,7 @@
 
         <div class="row col-lg-12 ListGallery">
 
-            <div class="SCard">
-                <video class="Svideo"></video>
-                <button>حذف</button><button>ویرایش</button>
-            </div>
-
-
-            <div class="MCard">
-                <video class="Mvideo"></video>
-                <button>حذف</button><button>ویرایش</button>
-            </div>
-
-            <div class="LCard">
-            <video class="Lvideo"></video>
-            <button>حذف</button><button>ویرایش</button>
-        </div>
-
-            <div class="xsCard">
-                <video class="xsvideo"></video>
-                <button>حذف</button><button>ویرایش</button>
-            </div>
-            <div class="XLCard">
-                <video class="XLvideo"></video>
-                <button>حذف</button><button>ویرایش</button>
-
-            </div>
-
-            <div class="SCard">
-                <video class="Svideo"></video>
-                <button>حذف</button><button>ویرایش</button>
-            </div>
+  <?php $function->manage_gallery();?>
         </div>
 
     </div>

@@ -1,4 +1,4 @@
-<?php include_once "../resources/config.php";?>
+<?php include_once "../mahbod_team/resources/config.php";?>
 <?php
 //if(!isset($_SESSION['username']))
 //{
@@ -6,13 +6,13 @@
 //   $function->redirect("../login.php");
 //}
 ?>
-<?php require_once TEMPLATE_FRONT . DS . 'header.php'; ?>
+<?php //require_once TEMPLATE_FRONT . DS . 'header.php'; ?>
 
 <!-- Page Content -->
 <div class="container">
 
     <div class="row">
-        <?php require_once TEMPLATE_FRONT . DS . 'nav.php'; ?>
+<!--        --><?php //require_once TEMPLATE_FRONT . DS . 'nav.php'; ?>
         <!-- /.col-lg-3 -->
 
         <div class="col-lg-9">
