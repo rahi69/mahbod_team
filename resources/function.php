@@ -323,32 +323,32 @@ LIST;
     }
     public function sign_up()
     {
-        if($_SERVER["REQUEST_METHOD"]== "POST")
-        {
-            if(isset($_POST['submit']))
-            {
-                if(empty($_POST['username']) ||empty($_POST['password']) || empty($_POST['rpassword'])||empty($_POST['email']))
-                {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST['submit'])) {
+                if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['rpassword']) || empty($_POST['email'])) {
                     echo '<p style="background-color: #ac2925;color: white ;text-align: center"> Please fill all fields </p>';
-                }
-                else{
+                } else {
                     $username = $this->escape_string($_POST['username']);
-//                  $password = $this->escape_string($_POST['password']);
-                    $rpassword = $this->escape_string($_POST['rpassword']);
-                    if ($_POST['password'] == $rpassword) {
-                        $password = $this->escape_string($_POST['password']);
-                    } else {
-                        echo '<p style="background-color: #ac2925;color: white ;text-align: center">password wrong!! </p>';
-                    }
+                    $password1 = $this->escape_string($_POST['password']);
+                    $password2 = $this->escape_string($_POST['rpassword']);
                     $email = $this->escape_string($_POST['email']);
                     // check if e-mail address syntax is valid
-                    if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email))
-                    {
+                    if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)) {
                         echo '<p style="background-color: #ac2925;color: white ;text-align: center"> Invalid email format </p>';
+                        exit();
+                    }
+                    if (strlen($password1) < 3 || strlen($password2) < 3) {
+                        echo '<p style="background-color: #ac2925;color: white ;text-align: center"> Passwords arent strong enought</p>';
+                        exit;
                     }
 
-                    $sql="INSERT INTO admin (username,password,email) VALUES ('$username','$password','$email')";
-                    $result=$this->query($sql);
+                    if ($password1 != $password2) {
+                        echo '<p style="background-color: #ac2925;color: white ;text-align: center"> Passwords not matched</p>';
+                        exit;
+                    }
+                    $hashedPassword = sha1($password1);
+                    $sql = "INSERT INTO admin (username,password,email) VALUES ('$username','$hashedPassword','$email')";
+                    $result = $this->query($sql);
                     $this->confirm($result);
                 }
             }
