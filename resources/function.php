@@ -305,7 +305,7 @@ LIST;
 
                 } else {
                     $username = $this->escape_string($_POST['username']);
-                    $password = $this->escape_string($_POST['password']);
+                    $password =sha1($this->escape_string($_POST['password']));
                     $sql = "SELECT * FROM admin WHERE username='{$username}' AND password ='{$password}'";
                     $result = $this->query($sql);
                     $this->confirm($result);
@@ -337,7 +337,7 @@ LIST;
                         echo '<p style="background-color: #ac2925;color: white ;text-align: center"> Invalid email format </p>';
                         exit();
                     }
-                    if (strlen($password1) < 3 || strlen($password2) < 3) {
+                    if (strlen($password1) <=6 || strlen($password2) <=6) {
                         echo '<p style="background-color: #ac2925;color: white ;text-align: center"> Passwords arent strong enought</p>';
                         exit;
                     }
