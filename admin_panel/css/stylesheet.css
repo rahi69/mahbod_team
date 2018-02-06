@@ -3,7 +3,7 @@ body{
     padding: 0px;
     font-family: IRANSans;
     text-align:right;
-    background-image: url("../img/BackgroundHome.jpg");
+    background-image: url("../img/LoginPage.jpg");
     background-size:cover;
 
 }
@@ -64,7 +64,7 @@ body{
             }
 
     .nav-side-menu li {
-        background-image: url("../img/backList.jpg");
+        background-image: url("../img/LoginPage.jpg");
         background-size: cover;
         margin-bottom: 5%;
     }
@@ -178,7 +178,7 @@ body{
         margin-bottom:1px;
     }
     .nav-side-menu{
-        background-image: url("../img/BackgroundHome.jpg");
+        background-image: url("../img/UserPicture.jpg");
         background-size: cover;
         padding:0;
     }
