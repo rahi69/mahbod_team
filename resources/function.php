@@ -266,7 +266,6 @@ VIDEO;
             </ul>
 LIST;
                     echo $list;
-
                 }
             }
         }

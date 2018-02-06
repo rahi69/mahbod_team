@@ -37,21 +37,27 @@
 
 
             <h2>Basic List Group</h2>
-        <?php $function->list_video(); ?>
-
+<!--        <form method="post" name="video">-->
+        <?php
+        $function->list_video(); ?>
+<!--        </form>-->
     </div>
 
     <div class="col-md-6">
 
         <h2>Basic List Group</h2>
-        <?php $function->filter_list_video(); ?>
+        <?php
+        if(isset($_POST['search_cat'])){
+            $function->filter_list_video();
+//            $video=$_POST['video'];
+        }?>
 
     </div>
 
 </div>
 <aside id="admin_sidebar" class="col-md-4">
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-    <?php $function=new functions();
+    <?php
           $function->button();
     ?>
     <button  class="btn btn-primary" type="submit" name="Add_video">Add Video</button>

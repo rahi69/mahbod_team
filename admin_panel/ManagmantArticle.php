@@ -20,16 +20,7 @@
 
 <button class="hidden-lg" id="showListHome" onclick="showListHome()"></button>
 
-<script>
-    function showListHome() {
-        var x = document.getElementById("HomeLIST");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
-    }
-</script>
+<script src="Scripts/main.js"></script>
 <div>
 
     <img id="imgProfile" src="img/CIRLEpROFILE.jpg" height="124" width="89"/>

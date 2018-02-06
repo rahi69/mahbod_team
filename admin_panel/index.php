@@ -73,17 +73,8 @@
 </html>
 
 
-<script>
-    function openList1() {
-        var list = document.getElementById("headerList");
+<script src="Scripts/main.js"></script>
 
-        if (list.style.display == "none") {
-            list.style.display = "block";
-        } else {
-            list.style.display = "none";
-        }
-    }
-</script>
 <!--angular js-->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.4/angular.min.js"></script>
 

@@ -37,13 +37,32 @@
 </div>
 
 <?php
-$function=new functions();
-$ResponseUpdate =$function->UpdateArticleById();
-if ($ResponseUpdate == true){
-    echo "<script> alert('Success');</script>";
-}
-$result = $function->edit_article();
+//$function=new functions();
+//$ResponseUpdate =$function->UpdateArticleById();
+//if ($ResponseUpdate == true){
+//    echo "<script> alert('Success');</script>";
+//}
+//$result = $function->edit_article();
+$id = $function->escape_string($_GET['edit_article']);
+$query=$function->query("SELECT * FROM tbl_article WHERE id_article = '{$id}'");;
+$function->confirm($query);
+$result = $function->fetch_array($query);
+//if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['submit_article']))
+{
+    $title = $function->escape_string($_POST['title']);
+    $short_desc =$function->escape_string($_POST['short_desc']);
+    $description =$function->escape_string($_POST['description']);
+    $image =$function->escape_string($_POST['image']);
+    $status =$function->escape_string($_POST['status']);
+    $query=$function->query("UPDATE tbl_article SET title ='{$title}' ,short_desc = '{$short_desc}' ,image_src = '{$image}' ,description ='{$description}',status = '{$status}' WHERE id_article ='{$id}'");
+    if ($query)
+    {
+        $function->redirect("list_article.php");
+    }
 
+//}
+}
 ?>
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
@@ -76,7 +95,7 @@ $result = $function->edit_article();
 
 
         <div class="form-group">
-            <button type="submit" name="submit" class="btn btn-primary pull-right">Update</button>
+            <button type="submit" name="submit_article" class="btn btn-primary pull-right">Update</button>
         </div>
 
 
