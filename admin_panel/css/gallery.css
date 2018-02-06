@@ -2,7 +2,7 @@
     color: #ffffff;
     margin: auto;
     height: 50px;
-    background-image: url("../img/backList.jpg");
+    background-image: url("../img/UserPicture.jpg");
     background-size: cover;
     padding: 20px;
     font-weight: bold;
@@ -107,7 +107,7 @@
     border: 1.5px solid #ffffff;
     width:100%;
     height:75%;
-    background-image: url("../img/backVideo.jpg");
+    background-image: url("../img/UserPicture.jpg");
     background-size: cover;
 }
 .ListGallery .Mvideo{

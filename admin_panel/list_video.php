@@ -5,10 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>List video</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script>
+    $(document).ready(function(){
 
+
+        $("#search_cat").click(function(){
+            $("#film").hide(2000000000);
+        });
+    });
+
+</script>
 </head>
 <body style="margin-left: 10px;margin-top: 10px">
 <div class="col-lg-12">
@@ -31,21 +41,23 @@
             <option value="<?php echo $row['id_category']?>"><?php echo $row['name_category']?></option>
         <?php }?>
     </select>
-    <button type="submit" class="btn btn-primary" name="search_cat">find</button>
+    <button id="search_cat" type="submit" class="btn btn-primary" name="search_cat">find</button>
     </form>
 
 
 
-            <h2>Basic List Group</h2>
+            <h2>whole films</h2>
 <!--        <form method="post" name="video">-->
+        <div id = "film">
         <?php
         $function->list_video(); ?>
 <!--        </form>-->
+        </div><!--end film-->
     </div>
 
     <div class="col-md-6">
 
-        <h2>Basic List Group</h2>
+        <h2>selected list</h2>
         <?php
         if(isset($_POST['search_cat'])){
             $function->filter_list_video();

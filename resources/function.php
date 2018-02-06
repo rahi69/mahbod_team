@@ -236,11 +236,12 @@ DELIMITER;
         while ($row=$this->fetch_array($result))
         {
             $list=<<<VIDEO
-            <ul class="list-group">
+            <ul id ="list-group" class="list-group">
                 <div class="item"  href="#"><video width="200" height="100"  controls>
                         <source src="upload/{$row['video']}" type="video/mp4">
                     </video></div>
                     <div><a class="btn btn-danger" href="index.php?delete_video={$row['id_video']}">delete</a></div>
+                   
             </ul>
 VIDEO;
              echo $list;
