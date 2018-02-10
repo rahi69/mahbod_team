@@ -20,4 +20,5 @@ $connection->set_charset(CHARSET);
 
 //include '../../resources/db/function.php';
 require_once "function.php";
+require_once "../webService/webServiceController.php";
 

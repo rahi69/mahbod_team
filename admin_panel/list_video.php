@@ -14,7 +14,9 @@
 
 
         $("#search_cat").click(function(){
-            $("#film").hide(2000000000);
+//            $("#film").hide(2000);
+            $("#film").hide(2000);
+          //  $("#film").css("background-color", "yellow");
         });
     });
 
@@ -48,11 +50,11 @@
 
             <h2>whole films</h2>
 <!--        <form method="post" name="video">-->
-        <div id = "film">
+
         <?php
         $function->list_video(); ?>
 <!--        </form>-->
-        </div><!--end film-->
+
     </div>
 
     <div class="col-md-6">

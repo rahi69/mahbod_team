@@ -2,7 +2,12 @@
 if(!isset($_SESSION))
 {
     session_start();
-}class functions
+}
+
+/**
+ * Class functions
+ */
+class functions
 {
     public function set_message($msg)
     {
@@ -42,6 +47,10 @@ if(!isset($_SESSION))
         return $result->fetch_array();
     }
 
+    /**
+     * @param $string
+     * @return string
+     */
     public function escape_string($string)
     {
         global $connection;
@@ -236,13 +245,16 @@ DELIMITER;
         while ($row=$this->fetch_array($result))
         {
             $list=<<<VIDEO
-            <ul id ="list-group" class="list-group">
-                <div class="item"  href="#"><video width="200" height="100"  controls>
+            <div id="film">
+            <!--<ul id ="list-group" class="list-group">-->
+               <div class="item"  href="#">
+                <video width="200" height="100"  controls>
                         <source src="upload/{$row['video']}" type="video/mp4">
-                    </video></div>
+                 </video>
+               </div>
                     <div><a class="btn btn-danger" href="index.php?delete_video={$row['id_video']}">delete</a></div>
-                   
-            </ul>
+                   </div>
+            <!--</ul>-->
 VIDEO;
              echo $list;
 
